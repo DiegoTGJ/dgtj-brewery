@@ -19,6 +19,7 @@ import static org.hamcrest.core.Is.is;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
+import static org.mockito.Mockito.times;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -84,5 +85,12 @@ public class BeerControllerTest {
 
         then(beerService).should().updateBeer(any(UUID.class),any(BeerDto.class));
 
+    }
+
+    @Test
+    void deleteBeer() throws Exception {
+        mockMvc.perform(delete(API_ENDPOINT+validBeer.getId()).accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNoContent());
+        then(beerService).should(times(1)).deleteById(any(UUID.class));
     }
 }
