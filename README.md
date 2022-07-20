@@ -1,2 +1,2 @@
-![Master](https://github.com/github/docs/actions/workflows/main.yml/badge.svg?branch=master)
+![Master](https://github.com/DiegoTGJ/dgtj-brewery/actions/workflows/gradle.yml/badge.svg)
 # dgtj-brewery
