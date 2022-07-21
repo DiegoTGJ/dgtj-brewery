@@ -1,7 +1,7 @@
-package dtgp.spring.mscbrewery.web.controller;
+package dtgp.spring.mscbrewery.web.controller.v2;
 
-import dtgp.spring.mscbrewery.web.model.BeerDto;
-import dtgp.spring.mscbrewery.services.BeerService;
+import dtgp.spring.mscbrewery.services.v2.BeerServiceV2;
+import dtgp.spring.mscbrewery.web.model.v2.BeerDtoV2;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -10,36 +10,34 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
 
-
-//could add @Deprecated
 @Slf4j
-@RequestMapping("/api/v1/beer")
+@RequestMapping("/api/v2/beer")
 @RestController
-public class BeerController {
+public class BeerControllerV2 {
 
-    private final BeerService beerService;
+    private final BeerServiceV2 beerService;
 
-    public BeerController(BeerService beerService) {
+    public BeerControllerV2(BeerServiceV2 beerService) {
         this.beerService = beerService;
     }
 
     @GetMapping({"/{beerId}"})
-    public ResponseEntity<BeerDto> getBeer(@PathVariable UUID beerId){
+    public ResponseEntity<BeerDtoV2> getBeer(@PathVariable UUID beerId){
         log.warn("Request made to getBeer");
         return new ResponseEntity<>(beerService.getBeerById(beerId), HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<String> handlePost(@RequestBody BeerDto beerDto){
+    public ResponseEntity<String> handlePost(@RequestBody BeerDtoV2 beerDto){
         log.info("Posting beer to system...");
-        BeerDto savedDto = beerService.saveNewBeer(beerDto);
+        BeerDtoV2 savedDto = beerService.saveNewBeer(beerDto);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Location","/api/v1/beer/"+savedDto.getId().toString());
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
 
     @PutMapping({"/{beerId}"})
-    public ResponseEntity<String> handleUpdate(@PathVariable UUID beerId,@RequestBody BeerDto beerDto){
+    public ResponseEntity<String> handleUpdate(@PathVariable UUID beerId,@RequestBody BeerDtoV2 beerDto){
         log.info("Starting updating beer...");
         beerService.updateBeer(beerId,beerDto);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);

@@ -2,7 +2,7 @@ package dtgp.spring.mscbrewery.web.controller;
 
 
 import dtgp.spring.mscbrewery.web.model.CustomerDto;
-import dtgp.spring.mscbrewery.web.services.CustomerService;
+import dtgp.spring.mscbrewery.services.CustomerService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

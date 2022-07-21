@@ -1,4 +1,4 @@
-package dtgp.spring.mscbrewery.web.services;
+package dtgp.spring.mscbrewery.services;
 
 import dtgp.spring.mscbrewery.web.model.BeerDto;
 import lombok.extern.slf4j.Slf4j;

@@ -2,7 +2,7 @@ package dtgp.spring.mscbrewery.web.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import dtgp.spring.mscbrewery.web.model.BeerDto;
-import dtgp.spring.mscbrewery.web.services.BeerService;
+import dtgp.spring.mscbrewery.services.BeerService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

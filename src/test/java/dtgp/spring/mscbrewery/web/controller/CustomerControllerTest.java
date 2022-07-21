@@ -1,10 +1,8 @@
 package dtgp.spring.mscbrewery.web.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dtgp.spring.mscbrewery.web.model.BeerDto;
 import dtgp.spring.mscbrewery.web.model.CustomerDto;
-import dtgp.spring.mscbrewery.web.services.CustomerService;
+import dtgp.spring.mscbrewery.services.CustomerService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
