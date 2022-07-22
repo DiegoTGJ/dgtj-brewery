@@ -42,7 +42,7 @@ public class BeerControllerTest {
 
     @BeforeEach
     public void setUp(){
-        validBeer = BeerDto.builder().id(UUID.randomUUID())
+        validBeer = BeerDto.builder()
                 .beerName("Beer1")
                 .beerStyle("PALE_ALE")
                 .upc(1232456789L)
@@ -51,12 +51,13 @@ public class BeerControllerTest {
 
     @Test
     public void getBeer() throws Exception {
+        UUID id = UUID.randomUUID();
+        validBeer.setId(id);
         given(beerService.getBeerById(any(UUID.class))).willReturn(validBeer);
-
-        mockMvc.perform(get(API_ENDPOINT+validBeer.getId().toString()).accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get(API_ENDPOINT+id).accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.id",is(validBeer.getId().toString())))
+                .andExpect(jsonPath("$.id",is(id.toString())))
                 .andExpect(jsonPath("$.beerName",is("Beer1")));
     }
 
@@ -78,7 +79,7 @@ public class BeerControllerTest {
         updatedDto.setBeerName("New Name");
         String updatedBeerDtoJson = objectMapper.writeValueAsString(updatedDto);
 
-        mockMvc.perform(put(API_ENDPOINT+validBeer.getId())
+        mockMvc.perform(put(API_ENDPOINT+UUID.randomUUID())
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(updatedBeerDtoJson))
                 .andExpect(status().isNoContent());
@@ -89,7 +90,7 @@ public class BeerControllerTest {
 
     @Test
     void deleteBeer() throws Exception {
-        mockMvc.perform(delete(API_ENDPOINT+validBeer.getId()).accept(MediaType.APPLICATION_JSON))
+        mockMvc.perform(delete(API_ENDPOINT+UUID.randomUUID()).accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
         then(beerService).should(times(1)).deleteById(any(UUID.class));
     }
